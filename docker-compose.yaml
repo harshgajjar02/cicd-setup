@@ -1,0 +1,44 @@
+# version: '3.8'
+# services:
+
+#   vprocache01:
+#     image: memcached
+#     ports:
+#       - "11211:11211"
+
+#   vpromq01:
+#     image: rabbitmq
+#     ports:
+#       - "15672:15672"
+#     environment:
+#       - RABBITMQ_DEFAULT_USER=guest
+#       - RABBITMQ_DEFAULT_PASS=guest
+
+# volumes:
+#   vprodbdata: {}
+#   vproappdata: {}
+ 
+services:
+
+  jenkins:
+    image: jenkins/jenkins
+    stop_grace_period: 2m
+    ports:
+      - "8080:8080"
+      - "5000:5000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+  ssh-agent:
+    image: jenkins/ssh-agent
+
+  nexus:
+    image: sonatype/nexus3:3.60.0
+    stop_grace_period: 2m
+    ports:
+      - "8081:8081"
+    volumes:
+      - nexus-data:/nexus-data
+
+volumes:
+  jenkins_home: {}
+  nexus-data: {}

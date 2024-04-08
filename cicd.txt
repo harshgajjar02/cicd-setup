@@ -1,0 +1,13 @@
+In this setup we will just run everything on containers for practing cicd
+Also its not recommended to run it on single machine
+I am using t2.medium till now if pipeline fails i will split the services in differnt instances
+
+for jenkins after docker compose up see the logs and you will get intial password
+for nexus3 run command docker exec -it <<containerId>> cat /nexus_data/admin.password
+
+security group settings
+jenkins = ssh from my ip , all-traffic from my ip
+nexus = ssh from my ip , all-traffic from my ip , all traffic from jenkin-security group 
+sonar = ssh from my ip , all-traffic from my ip, all traffic from jenkin-security group
+
+sonaqube setup
